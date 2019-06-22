@@ -74,7 +74,6 @@ class BarChartJFX : Application() {
     }
 
 }
-
 ```
 
 
@@ -95,7 +94,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "io.data2viz:d2v-data2viz-jfx:0.7.2-RC1"
 }
-
 ```
 
 IntellijIdea proposes to `Import Changes`, and we accept it by 
@@ -107,4 +105,59 @@ The library is then automatically downloaded. We have the
 confirmation by opening the Gradle tool window.
 
 <img src="javafx-bar-chart6.png" width="500"/>
+
+Now, we can add `data2viz` code. Let's change the `start` function:
+
+```kotlin
+override fun start(stage: Stage?) {
+    val root = Group()
+    stage?.let {
+        it.title = "JavaFX bar chart"
+        it.scene = Scene(root, width, height)
+        val canvas = Canvas(width, height)
+        root.children.add(canvas)
+        val viz = viz {
+            rect {
+                width = 50.0
+                height = 50.0
+                fill = Colors.Web.blueviolet
+            }
+        }
+        JFxVizRenderer(canvas, viz)
+        viz.render()
+
+        it.show()
+    }
+}
+```
+
+Launching the application, we have this result:
+
+<img src="javafx-bar-chart7.png" width="500"/>
+
+Kudos, we have our first visualization! But how it's 
+working, what did we do? 
+
+First, we add a JavaFX `Canvas` to the component tree:
+```kotlin
+        val canvas = Canvas(width, height)
+        root.children.add(canvas)
+```
+`data2viz` draws a memory visualization on a canvas. 
+We need that canvas in the targeted platform. 
+
+We then have defined the visualization. We create it 
+by calling the `viz` function. 
+
+This function takes a lambda that starts the data2viz 
+DSL. Inside this lambda, we have access to available 
+functions of `viz`. `rect` is a function call that 
+creates a rectangle and takes a rectangle configuration 
+lambda that allow us to define the properties of this 
+rectangle: its width, height and fill color.
+
+We, then, bind this visualization to the canvas by 
+creating a JfxVizRender: `JFxVizRenderer(canvas, viz)`.
+
+The last call, `viz.render()` draws the viz on the canvas.
 
