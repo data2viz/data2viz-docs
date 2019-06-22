@@ -70,7 +70,10 @@ to code without previous precise knowledge of the API.
 ## DSL
 
 ### Extensions
+TODO
 
 ### Tree builders
+TODO
 
 ### Configuration lambdas
+TODO
