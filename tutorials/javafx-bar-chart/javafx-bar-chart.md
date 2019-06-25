@@ -270,7 +270,7 @@ It's an essential first step because it's the most comfortable
 environment to test and debug data visualization.
 
 You can find the complete code of this project on 
-[our data2viz examples repository](https://github.com/data2viz/data2viz-examples/tree/master/jfx).
+[our data2viz examples repository](https://github.com/data2viz/data2viz-examples/blob/master/tutorials/jfx-barchart/).
 
 
 If you have any suggestion, request, or feedback, please feel free 
