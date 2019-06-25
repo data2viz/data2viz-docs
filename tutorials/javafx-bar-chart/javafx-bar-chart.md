@@ -269,6 +269,10 @@ Great, you now know how to create a data2viz project in a JavaFX application.
 It's an essential first step because it's the most comfortable 
 environment to test and debug data visualization.
 
+You can find the complete code of this project on 
+[our data2viz examples repository](https://github.com/data2viz/data2viz-examples/tree/master/jfx).
+
+
 If you have any suggestion, request, or feedback, please feel free 
 to post a comment [on the forum](https://forum.data2viz.io/t/data2viz-documentation/96)
  or create a pull request on this project.
