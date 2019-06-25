@@ -1,24 +1,37 @@
-This project contains all the documentation for the data2viz library.
+# Data2viz documentation
+
+Everything you need to know about the 
+**[data2viz](https://github.com/data2viz/data2viz)** library.
+
+##How the documentation is organized
+
+A high-level overview of how it’s organized will help 
+you know where to look for certain things:
 
 
 
-## Contents
 
 ### [Tutorials](tutorials/index.md)
-Get started with hands-on introductions to the data2viz library.
+Tutorials take you by the hand through a series of steps to 
+create a datavisualization. Start here if you’re new to 
+**data2viz**.
 
 * [Let's make a JavaFX bar chart](tutorials/javafx-bar-chart/javafx-bar-chart.md).
 
-### [How-to guides](how-to/index.md)
-Step-by-step guides for the developer covering key operations and procedures
 
 ### [Reference](reference/index.md)
-Technical reference
+Reference guides contain technical reference for APIs and other aspects of Django’s machinery. They describe how it works and how to use it but assume that you have a basic understanding of key concepts.
 
-### [Background](background/index.md)
-Explanation and discussion of key topics.
+### [Topics](topics/index.md)
+Topic guides discuss key topics and concepts at a fairly 
+high level and provide useful background information and
+ explanation.
 
-* [A multiplatform library](background/multiplatform.md)
-* [API and DSL principles](background/api-and-dsl.md)
-* [Geo Projections](background/geo.md) 
+* [API and DSL principles](topics/api-and-dsl.md)
+* [Geo Projections](topics/geo.md) 
 
+### [How-to guides](how-to/index.md)
+How-to guides are recipes. They guide you through the steps 
+involved in addressing key problems and use-cases. They 
+are more advanced than tutorials and assume some knowledge 
+of how **data2viz** works.
