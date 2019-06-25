@@ -11,7 +11,8 @@ This tutorial will help you understand how to:
 
 1. set the gradle build for a data2viz JavaFX project,
 1. wrap a viz inside a JavaFX application,
-1. use basic visual components like rectangle, text, colors, axis.
+1. use basic visual components like rectangle, text, colors, group.
+1. introduce `Scale` functions.
 
 
 ## Creating a new project
@@ -161,3 +162,107 @@ creating a JfxVizRender: `JFxVizRenderer(canvas, viz)`.
 
 The last call, `viz.render()` draws the viz on the canvas.
 
+## Displaying data as a bars
+
+So let's say we have this data defined as a global value:
+
+```kotlin
+val data = listOf(4, 8, 15, 16, 23, 42)
+```
+
+We define two more constants:
+
+```kotlin
+const val barHeight = 14.0
+const val padding = 2.0
+```
+
+We are now iterating on the data using index to create a rectangle
+for each of it and adding a text representing its value.
+
+```kotlin
+val viz = viz {
+    data.forEachIndexed { index, datum ->
+        group {
+            transform {
+                translate(
+                    x = padding,
+                    y = padding + index * (padding + barHeight) )
+            }
+            rect {
+                width = 10.0 * datum
+                height = barHeight
+                fill = Colors.Web.steelblue
+            }
+            text {
+                textContent = datum.toString()
+                hAlign = TextHAlign.RIGHT
+                vAlign = TextVAlign.HANGING
+                x = datum * 10.0 - padding
+                y = 1.5
+                textColor = Colors.Web.white
+                fontSize = 10.0
+            }
+        }
+    }
+}
+```
+
+We use a group to add a translation for each value, adding a `x` padding and moving 
+on the `y` from the height of the bar plus a padding.
+
+It produces the following result:
+
+<img src="javafx-bar-chart8.png" width="500"/>
+
+In this first version, we used a fixed ratio of 10.0 to define the width of the bar. 
+It was ok, because we knew the max value of data and 10.0 * maxValue was still inside
+the viz bounds. But, we can do better to have an automatic scaling without knowing
+data.
+
+For that, we introduce a `Scale` that will manage the ratio to keep the bars exactly
+in the bounds of the viz:
+
+```kotlin
+val data = listOf(4, 8, 15, 16, 23, 42)
+
+val xScale = Scales.Continuous.linear {
+    domain = listOf(.0, data.max()!!.toDouble())
+    range = listOf(.0, width- 2* padding)
+}
+```
+
+This code creates a `Scale` that maps the domain values [0..42] to the wanted widths [0.0 .. 496.0].
+We can use this scale in the visualization code to set the expected width of the bar, and position 
+of the text:
+
+````kotlin
+val viz = viz {
+    data.forEachIndexed { index, datum ->
+        group {
+            transform {
+                translate(
+                    x = padding,
+                    y = padding + index * (padding + barHeight) )
+            }
+            rect {
+                width = xScale(datum)
+                height = barHeight
+                fill = Colors.Web.steelblue
+            }
+            text {
+                textContent = datum.toString()
+                hAlign = TextHAlign.RIGHT
+                vAlign = TextVAlign.HANGING
+                x = xScale(datum) - 2.0
+                y = 1.5
+                textColor = Colors.Web.white
+                fontSize = 10.0
+            }
+        }
+    }
+}
+````
+<img src="javafx-bar-chart9.png" width="500"/>
+
+Great, 
