@@ -1,5 +1,5 @@
 
-# Let's make a JavaFX    Barchart
+# Let's make a JavaFX Barchart
 
 In this first tutorial, we'll use data2viz to display a bar chart 
 in a JavaFX application. 
