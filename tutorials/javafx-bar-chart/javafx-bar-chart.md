@@ -4,7 +4,7 @@
 In this first tutorial, we'll use data2viz to display a bar chart 
 in a JavaFX application. 
 
->This tutorial is data2viz version of [D3JS original version](https://bost.ocks.org/mike/bar/).
+>This tutorial is data2viz version of [D3JS Let’s Make a Bar Chart](https://bost.ocks.org/mike/bar/).
 
 
 This tutorial will help you understand how to:
