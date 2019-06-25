@@ -9,8 +9,6 @@ A high-level overview of how it’s organized will help
 you know where to look for certain things:
 
 
-
-
 ### [Tutorials](tutorials/index.md)
 Tutorials take you by the hand through a series of steps to 
 create a datavisualization. Start here if you’re new to 

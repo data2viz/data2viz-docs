@@ -1,4 +1,8 @@
-# Background
+# Topics
+
+Topic guides discuss key topics and concepts at a fairly 
+high level and provide useful background information and
+ explanation.
 
 ## Core features
 
