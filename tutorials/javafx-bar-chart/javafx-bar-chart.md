@@ -265,4 +265,10 @@ val viz = viz {
 ````
 <img src="javafx-bar-chart9.png" width="500"/>
 
-Great, 
+Great, you now know how to create a data2viz project in a JavaFX application. 
+It's an essential first step because it's the most comfortable 
+environment to test and debug data visualization.
+
+If you have any suggestion, request, or feedback, please feel free 
+to post a comment [on the forum](https://forum.data2viz.io/t/data2viz-documentation/96)
+ or create a pull request on this project.
