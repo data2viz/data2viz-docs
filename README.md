@@ -18,11 +18,6 @@ create a datavisualization. Start here if you’re new to
 * [Let's make a Kotlin/JS bar chart](tutorials/kotlinJS-bar-chart/kotlinjs-bar-chart.md)
 
 
-### [Reference](reference/index.md)
-Reference guides contain technical reference for data2viz API. 
-They describe how it works and how to use it but assume that you have 
-a basic understanding of key concepts.
-
 ### [Topics](topics/index.md)
 Topic guides discuss key topics and concepts at a fairly 
 high level and provide useful background information and
@@ -36,3 +31,8 @@ How-to guides are recipes. They guide you through the steps
 involved in addressing key problems and use-cases. They 
 are more advanced than tutorials and assume some knowledge 
 of how **data2viz** works.
+
+### [Reference](reference/index.md)
+Reference guides contain technical reference for data2viz API. 
+They describe how it works and how to use it but assume that you have 
+a basic understanding of key concepts.
