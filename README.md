@@ -3,7 +3,7 @@
 Everything you need to know about the 
 **[data2viz](https://github.com/data2viz/data2viz)** library.
 
-##How the documentation is organized
+## How the documentation is organized
 
 A high-level overview of how it’s organized will help 
 you know where to look for certain things:
