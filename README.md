@@ -19,7 +19,9 @@ create a datavisualization. Start here if you’re new to
 
 
 ### [Reference](reference/index.md)
-Reference guides contain technical reference for APIs and other aspects of Django’s machinery. They describe how it works and how to use it but assume that you have a basic understanding of key concepts.
+Reference guides contain technical reference for data2viz API. 
+They describe how it works and how to use it but assume that you have 
+a basic understanding of key concepts.
 
 ### [Topics](topics/index.md)
 Topic guides discuss key topics and concepts at a fairly 
