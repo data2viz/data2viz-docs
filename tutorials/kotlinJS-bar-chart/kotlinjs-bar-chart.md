@@ -315,12 +315,10 @@ val viz = viz {
 ````
 <img src="kotlinjs-bar-chart10.png" width="500"/>
 
-Great, you now know how to create a data2viz project in a JavaFX application. 
-It's an essential first step because it's the most comfortable 
-environment to test and debug data visualization.
+Great, you now know how to create a data2viz project in a KotlinJS application. 
 
 You can find the complete code of this project on 
-[our data2viz examples repository](https://github.com/data2viz/data2viz-examples/blob/master/tutorials/jfx-barchart/).
+[our data2viz examples repository](https://github.com/data2viz/data2viz-examples/blob/master/tutorials/barchart-js/).
 
 
 If you have any suggestion, request, or feedback, please feel free 
