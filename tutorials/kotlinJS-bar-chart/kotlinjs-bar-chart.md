@@ -1,5 +1,5 @@
 
-# Let's make a Kotlin/JS Barchart
+# Let's make a Kotlin/JS bar chart
 
 This tutorial is a step-by-step guide that explains how to 
 create a Kotlin/JS project that displays a bar chart inside 
@@ -263,7 +263,7 @@ on the `y` from the height of the bar plus a padding.
 
 It produces the following result:
 
-<img src="javafx-bar-chart9.png" width="500"/>
+<img src="kotlinjs-bar-chart9.png" width="500"/>
 
 In this first version, we used a fixed ratio of 10.0 to define the width of the bar. 
 It was ok, because we knew the max value of data and 10.0 * maxValue was still inside
@@ -313,7 +313,7 @@ val viz = viz {
     }
 }
 ````
-<img src="javafx-bar-chart9.png" width="500"/>
+<img src="kotlinjs-bar-chart10.png" width="500"/>
 
 Great, you now know how to create a data2viz project in a JavaFX application. 
 It's an essential first step because it's the most comfortable 
