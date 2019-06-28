@@ -5,6 +5,6 @@ create a data visualization. Start here if you’re new
 to **data2viz**.
 
 
-* [Let's make a JavaFX bar chart](tutorials/javafx-bar-chart/javafx-bar-chart.md)
-* [Let's make a Kotlin/JS bar chart](tutorials/kotlinJS-bar-chart/kotlinjs-bar-chart.md)
+* [Let's make a JavaFX bar chart](javafx-bar-chart/javafx-bar-chart.md)
+* [Let's make a Kotlin/JS bar chart](kotlinJS-bar-chart/kotlinjs-bar-chart.md)
 
