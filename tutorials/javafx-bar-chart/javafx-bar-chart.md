@@ -2,7 +2,7 @@
 # Let's make a JavaFX Barchart
 
 In this first tutorial, we'll use data2viz to display a bar chart 
-in a JavaFX application. 
+in a JavaFX application using **data2viz** libraray. 
 
 >This tutorial is data2viz version of [D3JS Let’s Make a Bar Chart](https://bost.ocks.org/mike/bar/).
 
@@ -14,6 +14,11 @@ This tutorial will help you understand how to:
 1. use basic visual components like rectangle, text, colors, group.
 1. introduce `Scale` functions.
 
+### What you'll need?
+
+- 15 minutes
+- JDK 1.8
+- Intellij Community or Ultimate (tested with IntelliJ 2019.1.*)
 
 ## Creating a new project
 
@@ -77,7 +82,6 @@ class BarChartJFX : Application() {
 }
 ```
 
-
 Nothing fancy here, just an empty JavaFX application using 
 some width and height.
 
@@ -130,6 +134,15 @@ override fun start(stage: Stage?) {
         it.show()
     }
 }
+```
+
+We also add the needed imports.
+
+```kotlin
+import io.data2viz.color.Colors
+import io.data2viz.viz.JFxVizRenderer
+import io.data2viz.viz.viz
+import javafx.scene.canvas.Canvas
 ```
 
 Launching the application, we have this result:
@@ -246,7 +259,7 @@ val viz = viz {
                     y = padding + index * (padding + barHeight) )
             }
             rect {
-                width = xScale(datum)
+                width = xScale(datum)           //<- now using scale for bar width
                 height = barHeight
                 fill = Colors.Web.steelblue
             }
@@ -254,7 +267,7 @@ val viz = viz {
                 textContent = datum.toString()
                 hAlign = TextHAlign.RIGHT
                 vAlign = TextVAlign.HANGING
-                x = xScale(datum) - 2.0
+                x = xScale(datum) - 2.0        //<- and also for positioning text
                 y = 1.5
                 textColor = Colors.Web.white
                 fontSize = 10.0
