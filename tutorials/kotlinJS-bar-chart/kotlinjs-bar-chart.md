@@ -152,7 +152,7 @@ dependency on data2viz library in `gradle.build` file:
 
 ```groovy
 dependencies {
-	implementation "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
     implementation "io.data2viz:d2v-data2viz-js:0.8.0-RC1"
 }
 ```
