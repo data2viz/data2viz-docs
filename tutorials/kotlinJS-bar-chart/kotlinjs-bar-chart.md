@@ -3,30 +3,31 @@
 
 This tutorial is a step-by-step guide that explains how to 
 create a Kotlin/JS project that displays a bar chart inside 
-an HTML page.
+an HTML page *(this tutorial has been tested on IntelliJIdea community edition 2019.2.2).*
+
 
 >This tutorial is data2viz version of [D3JS Let’s Make a Bar Chart](https://bost.ocks.org/mike/bar/).
 
 
 This tutorial will help you understand how to:
 
-1. set the gradle build for a data2viz JavaFX project,
-1. wrap a viz inside a JavaFX application,
+1. set the gradle build for a data2viz JavaScript project,
+1. wrap a viz inside an HTML page,
 1. use basic visual components like rectangle, text, colors, group.
 1. introduce `Scale` functions.
 
 
 ## Creating the Kotlin/JS project
 
-For this target, we start by creating in an empty directory a `build.gradle` 
-file that contains the following lines.
+For this target, we start by creating a directory named `barchart-js` and a `build.gradle` 
+file in it, containing the following lines.
 
 ```groovy
 group 'io.data2viz.barchartJS'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.3.40'
+    ext.kotlin_version = '1.3.50'
     repositories {
         mavenCentral()
     }
@@ -50,22 +51,13 @@ We then open the file from IntellijIdea, and choose "Open as a project".
 
 <img src="kotlinjs-bar-chart1.png" width="400"/>
 
-We set Gradle options like this:
-
-<img src="kotlinjs-bar-chart2.png" width="800"/>
-
-IntellijIdea creates the project, with all needed stuff:
- 
-- empty source directories,
-- `gradle` directory with the gradle-wrapper,
-- the Gradle launch scripts,
-
-It also synchronizes the Gradle project and download libraries.
+IntellijIdea creates the project, synchronizes the Gradle project and download libraries.
 
 <img src="kotlinjs-bar-chart3.png" width="800"/>
 
-We validate the configuration by creating a MainJS file inside the `kotlin` directory: 
 
+Then, we create the source directory `src/main/kotlin` with a first `MainJS` file in it, 
+to validate the configuration.
 
 ```kotlin
 fun main() {
@@ -88,7 +80,7 @@ file.
 <head>
     <meta charset="UTF-8">
     <title>Kotlin JS bar chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/kotlin@1.3.40/kotlin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/kotlin@1.3.50/kotlin.js"></script>
 </head>
 <body>
 <script src="build/classes/kotlin/main/barchart-js.js"></script>
@@ -148,8 +140,6 @@ We modify the HTML file to use the new mechanism.
 When we re-launch the `build` task, we can see that we have a new `kotlin-js-min` directory
 that contains our transpiled JS file but also the dependency files of the project.
 
-<img src="kotlinjs-bar-chart8.png" width="400"/>
-
 The new Kotlin2JS option `moduleKind = 'umd'` now includes an automatic 
 loading of dependency if a `require` function exists. Loading `require.min.js` 
 from a CDN in the head of the page, and configuring it to use the kotlinJs DCE 
@@ -162,8 +152,8 @@ dependency on data2viz library in `gradle.build` file:
 
 ```groovy
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "io.data2viz:d2v-data2viz-jfx:0.7.2-RC1"
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    implementation "io.data2viz:d2v-data2viz-js:0.8.0-RC1"
 }
 ```
 
@@ -173,7 +163,7 @@ Let's change the code to include a visualization.
 ```kotlin
 import io.data2viz.color.Colors
 import io.data2viz.geom.size
-import io.data2viz.viz.bindRendererOnNewCanvas
+import io.data2viz.viz.bindRendererOn
 import io.data2viz.viz.viz
 
 const val vizSize = 500.0
@@ -181,13 +171,15 @@ const val vizSize = 500.0
 fun main() {
     println("Hello Kotlin/JS")
     val viz = viz {
+    
+        size = size(vizSize, vizSize)
 
         rect {
-            size = size(vizSize, vizSize)
+            size = size(50.0, 50.0)
             fill = Colors.Web.blueviolet
         }
     }
-    viz.bindRendererOn("viz")
+    viz.bindRendererOn("viz")           //<- select a canvas with this id to install the viz 
 }
 ```
 
@@ -195,14 +187,13 @@ We also change the body of the HTML file to introduce a canvas.
 ```html
 <body>
 
-<canvas id="viz"></canvas>
+<canvas id="viz"></canvas>     <!--the id selected for viz binding -->
 <script >
     require.config({baseUrl: 'build/kotlin-js-min/main'});
     require(['barchart-js']);
 </script>
 </body>
 ```
-
 
 After building and reloading the page, we now have this basic rendering.
 
@@ -296,7 +287,7 @@ val viz = viz {
                     y = padding + index * (padding + barHeight) )
             }
             rect {
-                width = xScale(datum)
+                width = xScale(datum)           //<- now width is calculate from scale
                 height = barHeight
                 fill = Colors.Web.steelblue
             }
@@ -304,7 +295,7 @@ val viz = viz {
                 textContent = datum.toString()
                 hAlign = TextHAlign.RIGHT
                 vAlign = TextVAlign.HANGING
-                x = xScale(datum) - 2.0
+                x = xScale(datum) - 2.0         //<- also text positioning
                 y = 1.5
                 textColor = Colors.Web.white
                 fontSize = 10.0
