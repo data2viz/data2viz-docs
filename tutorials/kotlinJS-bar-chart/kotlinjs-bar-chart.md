@@ -23,27 +23,26 @@ For this target, we start by creating a directory named `barchart-js` and a `bui
 file in it, containing the following lines.
 
 ```groovy
+plugins {
+    id 'org.jetbrains.kotlin.js' version '1.3.61'
+}
+
 group 'io.data2viz.barchartJS'
 version '1.0-SNAPSHOT'
 
-buildscript {
-    ext.kotlin_version = '1.3.50'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
-apply plugin: 'kotlin2js'
-
 repositories {
+    jcenter()
     mavenCentral()
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
+}
+
+kotlin {
+    target {
+        browser {}
+    }
 }
 ```
 
@@ -67,93 +66,38 @@ fun main() {
 
 We launch the build frow the Gradle tool window by double-clicking on the` build` task.
 
-Gradle creates a build directory. The `kotlin2js` plugin transpiles Kotlin 
+Gradle creates a build directory. The `kotlin.js` plugin transpiles Kotlin 
 code into javascript using defaults options. 
 
-We create an `index-dev.html` file at the root of the project and 
-references `kotlin.js` through a CDN. We add a link to the transpiled 
+We create an `index.html` file in the `src/main/kotlin` directory. We add a link to the transpiled 
 file.
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Kotlin JS bar chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/kotlin@1.3.50/kotlin.js"></script>
-</head>
+<html>
 <body>
-<script src="build/classes/kotlin/main/barchart-js.js"></script>
+<script src="barchart-js.js"></script>
 </body>
 </html>
 ```
 
-When we open the HTML file in a browser, we can see our message in the console.
+To compile and launch the page, we just need to start the `browserRun` Gradle task.
+It automatically start the browser with the index page. We can see our message in the console.
 
-
-We change a little bit the `build.gradle` file to have better dependency management.
-
-
-```groovy
-apply plugin: 'kotlin2js'
-apply plugin: 'kotlin-dce-js'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
-}
-
-
-compileKotlin2Js {
-    kotlinOptions {
-        metaInfo = true
-        sourceMap = true
-        sourceMapEmbedSources = "always"
-        moduleKind = 'umd'
-    }
-}
-
-runDceKotlinJs.dceOptions.devMode = true
-```
-
-We modify the HTML file to use the new mechanism.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Kotlin JS bar chart</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-</head>
-<body>
-<script >
-    require.config({baseUrl: 'build/kotlin-js-min/main'});
-    require(['barchart-js']);
-</script>
-</body>
-</html>
-```  
-When we re-launch the `build` task, we can see that we have a new `kotlin-js-min` directory
-that contains our transpiled JS file but also the dependency files of the project.
-
-The new Kotlin2JS option `moduleKind = 'umd'` now includes an automatic 
-loading of dependency if a `require` function exists. Loading `require.min.js` 
-from a CDN in the head of the page, and configuring it to use the kotlinJs DCE 
-output directory makes the mechanism operating.
 
 ## Add a visualization
 
-It's time now to start data2viz code. First, we have to add a 
-dependency on data2viz library in `gradle.build` file:
+It's time now to start data2viz code. First, we have to add some 
+dependencies on data2viz library in `gradle.build` file:
 
 ```groovy
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
-    implementation "io.data2viz:d2v-data2viz-js:0.8.0-RC1"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
+    implementation "io.data2viz.d2v:core-js:0.8.0-RC9"
+    implementation "io.data2viz.d2v:color-js:0.8.0-RC9"
+    implementation "io.data2viz.d2v:scale-js:0.8.0-RC9"
+    implementation "io.data2viz.d2v:viz-js:0.8.0-RC9"
+}
 }
 ```
 
@@ -184,15 +128,15 @@ fun main() {
 ```
 
 We also change the body of the HTML file to introduce a canvas.
-```html
-<body>
 
+```html
+<!DOCTYPE html>
+<html>
+<body>
 <canvas id="viz"></canvas>     <!--the id selected for viz binding -->
-<script >
-    require.config({baseUrl: 'build/kotlin-js-min/main'});
-    require(['barchart-js']);
-</script>
+<script src="barchart-js.js"></script>
 </body>
+</html>
 ```
 
 After building and reloading the page, we now have this basic rendering.
