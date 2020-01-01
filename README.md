@@ -14,8 +14,8 @@ Tutorials take you by the hand through a series of steps to
 create a datavisualization. Start here if you’re new to 
 **data2viz**.
 
-* [Let's make a JavaFX bar chart](tutorials/javafx-bar-chart/javafx-bar-chart.md)
-* [Let's make a Kotlin/JS bar chart](tutorials/kotlinJS-bar-chart/kotlinjs-bar-chart.md)
+* [Let's make a JavaFX bar chart](tutorials/barchart-jfx/javafx-bar-chart.md)
+* [Let's make a Kotlin/JS bar chart](tutorials/barchart-js/kotlinjs-bar-chart.md)
 
 
 ### [Topics](topics/index.md)
@@ -36,3 +36,4 @@ of how **data2viz** works.
 Reference guides contain technical reference for data2viz API. 
 They describe how it works and how to use it but assume that you have 
 a basic understanding of key concepts.
+
