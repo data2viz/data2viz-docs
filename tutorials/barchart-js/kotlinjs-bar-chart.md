@@ -55,7 +55,7 @@ IntellijIdea creates the project, synchronizes the Gradle project and download l
 <img src="kotlinjs-bar-chart3.png" width="800"/>
 
 
-Then, we create the source directory `src/main/kotlin` with a first `MainJS` file in it, 
+Then, we create the source directory `src/main/kotlin` with a first `MainJS.kt` file in it, 
 to validate the configuration.
 
 ```kotlin
@@ -69,7 +69,7 @@ We launch the build frow the Gradle tool window by double-clicking on the` build
 Gradle creates a build directory. The `kotlin.js` plugin transpiles Kotlin 
 code into javascript using defaults options. 
 
-We create an `index.html` file in the `src/main/kotlin` directory. We add a link to the transpiled 
+We create an `index.html` file in the `src/main/resources` directory. We add a link to the transpiled 
 file.
 
 ```html
@@ -97,7 +97,6 @@ dependencies {
     implementation "io.data2viz.d2v:color-js:0.8.0-RC9"
     implementation "io.data2viz.d2v:scale-js:0.8.0-RC9"
     implementation "io.data2viz.d2v:viz-js:0.8.0-RC9"
-}
 }
 ```
 
@@ -213,7 +212,7 @@ val data = listOf(4, 8, 15, 16, 23, 42)
 
 val xScale = Scales.Continuous.linear {
     domain = listOf(.0, data.max()!!.toDouble())
-    range = listOf(.0, width- 2* padding)
+    range = listOf(.0, vizSize - 2 * padding)
 }
 ```
 
