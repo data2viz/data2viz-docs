@@ -93,10 +93,10 @@ dependencies on data2viz library in `gradle.build` file:
 ```groovy
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
-    implementation "io.data2viz.d2v:core-js:0.8.0-RC9"
-    implementation "io.data2viz.d2v:color-js:0.8.0-RC9"
-    implementation "io.data2viz.d2v:scale-js:0.8.0-RC9"
-    implementation "io.data2viz.d2v:viz-js:0.8.0-RC9"
+    implementation "io.data2viz.d2v:core-js:0.8.0-RC10"
+    implementation "io.data2viz.d2v:color-js:0.8.0-RC10"
+    implementation "io.data2viz.d2v:scale-js:0.8.0-RC10"
+    implementation "io.data2viz.d2v:viz-js:0.8.0-RC10"
 }
 ```
 
